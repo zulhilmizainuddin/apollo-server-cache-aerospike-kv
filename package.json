@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "aerospike": "docker run --rm -p 3000:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 -e NAMESPACE=test aerospike/aerospike-server",
     "build": "rimraf ./dist && tsc",
     "test": "nyc mocha -r ts-node/register tests/**/index.spec.ts"
   },

@@ -1,0 +1,19 @@
+---
+language: node_js
+node_js:
+  - node
+  - lts/*
+
+dist: bionic
+
+services:
+  - docker
+
+install:
+  - npm install
+
+before_script:
+  - npm run aerospike
+
+script:
+  - npm test
