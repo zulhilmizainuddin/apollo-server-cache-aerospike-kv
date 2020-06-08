@@ -16,15 +16,13 @@ describe('AerospikeCache', () => {
     });
   });
 
-  after(() => {
-    setTimeout(() => {
-      keyValueCache.close();
-    }, 2000);
+  after(async () => {
+    await keyValueCache.close();
   });
   
   context('basic cache functionality', () => {
-    beforeEach(() => {
-      keyValueCache.flush && keyValueCache.flush();
+    beforeEach(async () => {
+      await keyValueCache.flush();
     });
 
     it('can do a basic get and set', async () => {
@@ -50,12 +48,8 @@ describe('AerospikeCache', () => {
       sleep = promisify(setTimeout);
     });
 
-    beforeEach(() => {
-      keyValueCache.flush && keyValueCache.flush();
-    });
-
-    after(() => {
-      keyValueCache.close && keyValueCache.close();
+    beforeEach(async () => {
+      await keyValueCache.flush();
     });
 
     it('is able to expire keys based on ttl', async () => {
@@ -65,7 +59,7 @@ describe('AerospikeCache', () => {
       expect(await keyValueCache.get('short')).to.equal('s');
       expect(await keyValueCache.get('long')).to.equal('l');
 
-      await sleep(1500);
+      await sleep(2000);
 
       expect(await keyValueCache.get('short')).to.be.undefined;
       expect(await keyValueCache.get('long')).to.equal('l');
@@ -75,5 +69,18 @@ describe('AerospikeCache', () => {
       expect(await keyValueCache.get('short')).to.be.undefined;
       expect(await keyValueCache.get('long')).to.be.undefined;
     }).timeout(10000);
+
+    it('does not expire when ttl is null', async () => {
+      await keyValueCache.set('forever', 'yours', { ttl: null });
+      expect(await keyValueCache.get('forever')).to.equal('yours');
+
+      await sleep(2000);
+
+      expect(await keyValueCache.get('forever')).to.equal('yours');
+      
+      await sleep(4000);
+
+      expect(await keyValueCache.get('forever')).to.equal('yours');
+    }).timeout(10000);;
   });
 });
