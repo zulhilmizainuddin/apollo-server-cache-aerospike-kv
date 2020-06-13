@@ -66,3 +66,6 @@ typings/
 # build directory
 build
 dist
+
+# build metadata
+tsconfig.tsbuildinfo
