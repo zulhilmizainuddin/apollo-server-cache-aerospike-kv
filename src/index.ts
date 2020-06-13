@@ -4,7 +4,7 @@ import {
 } from 'apollo-server-caching';
 
 // @ts-ignore
-import Aerospike, { AerospikeError } from 'aerospike';
+import Aerospike, { AerospikeError, Client, Config, Key, Record } from 'aerospike';
 
 export interface DataModel {
   readonly namespace: string;
@@ -12,14 +12,14 @@ export interface DataModel {
 }
 
 export class AerospikeCache implements TestableKeyValueCache<string> {
-  private readonly client: any;
+  private readonly client: Client;
   private readonly defaultSetOptions: KeyValueCacheSetOptions = {
     ttl: 300,
   };
 
   // Aerospike client config reference https://www.aerospike.com/apidocs/nodejs/Config.html
-  constructor(clientConfig: any, private dataModel: DataModel) {
-    this.client = Aerospike.client(clientConfig);
+  constructor(config: Config, private dataModel: DataModel) {
+    this.client = new Client(config);
 
     this.client.connect();
   }
@@ -28,7 +28,7 @@ export class AerospikeCache implements TestableKeyValueCache<string> {
     const { ttl } = { ...this.defaultSetOptions, ...options };
 
     const { namespace, set } = this.dataModel;
-    const aerospikeKey = new Aerospike.Key(namespace, set, key);
+    const aerospikeKey = new Key(namespace, set, key);
 
     const bins = { value };
 
@@ -40,11 +40,11 @@ export class AerospikeCache implements TestableKeyValueCache<string> {
   async get(key: string): Promise<string | undefined> {
     try {
       const { namespace, set } = this.dataModel;
-      const aerospikeKey = new Aerospike.Key(namespace, set, key);
+      const aerospikeKey = new Key(namespace, set, key);
 
-      const record = await this.client.get(aerospikeKey);
+      const record: Record = await this.client.get(aerospikeKey);
 
-      const value = record.bins['value'];
+      const value: string = record.bins['value'];
 
       return value;
     } catch (err) {
@@ -60,7 +60,7 @@ export class AerospikeCache implements TestableKeyValueCache<string> {
     try {
       const { namespace, set } = this.dataModel;
 
-      const aerospikeKey = new Aerospike.Key(namespace, set, key);
+      const aerospikeKey = new Key(namespace, set, key);
 
       await this.client.remove(aerospikeKey);
 
@@ -83,7 +83,7 @@ export class AerospikeCache implements TestableKeyValueCache<string> {
       scan.nobins = false;
 
       const stream = scan.foreach();
-      stream.on('data', (record: any) => {
+      stream.on('data', (record: Record) => {
         this.client
           .remove(record.key)
           .catch((err: AerospikeError) => {
