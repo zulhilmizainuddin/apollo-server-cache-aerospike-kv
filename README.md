@@ -1,6 +1,6 @@
-# apollo-server-cache-aerospike-kv
+# apollo-server-cache-aerospike-kv [![Build Status](https://travis-ci.org/zulhilmizainuddin/apollo-server-cache-aerospike-kv.svg?branch=master)](https://travis-ci.org/zulhilmizainuddin/apollo-server-cache-aerospike-kv)
 
-[![Build Status](https://travis-ci.org/zulhilmizainuddin/apollo-server-cache-aerospike-kv.svg?branch=master)](https://travis-ci.org/zulhilmizainuddin/apollo-server-cache-aerospike-kv)
+[![NPM](https://nodei.co/npm/apollo-server-cache-aerospike-kv.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/apollo-server-cache-aerospike-kv/)
 
 This package exports an implementation of `KeyValueCache` that allows using Aerospike as a backing store for resource caching in [Data Sources](https://www.apollographql.com/docs/apollo-server/data/data-sources/).
 
