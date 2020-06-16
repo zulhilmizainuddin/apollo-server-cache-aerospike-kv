@@ -1,0 +1,7 @@
+# directories
+.nyc_output
+test
+
+# files
+.travis.yml
+tsconfig.tsbuildinfo
