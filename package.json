@@ -17,6 +17,10 @@
   ],
   "author": "Zulhilmi Mohamed Zainuddin",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zulhilmizainuddin/apollo-server-cache-aerospike-kv.git"
+  },
   "dependencies": {
     "aerospike": "^3.16.0",
     "apollo-server-caching": "^0.5.1"
