@@ -16,5 +16,6 @@ before_script:
   - npm run aerospike
 
 script:
+  - npm run lint:dry
   - npm test
   - npm run build
