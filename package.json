@@ -1,6 +1,6 @@
 {
   "name": "apollo-server-cache-aerospike-kv",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Apollo server caching implementation of KeyValueCache with Aerospike",
   "main": "dist/index.js",
   "scripts": {
