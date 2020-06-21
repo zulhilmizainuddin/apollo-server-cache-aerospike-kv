@@ -24,8 +24,10 @@
     "url": "https://github.com/zulhilmizainuddin/apollo-server-cache-aerospike-kv.git"
   },
   "dependencies": {
-    "aerospike": "^3.16.0",
     "apollo-server-caching": "^0.5.1"
+  },
+  "peerDependencies": {
+    "aerospike": "^3.8.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
