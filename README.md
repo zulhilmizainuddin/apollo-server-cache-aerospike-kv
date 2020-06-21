@@ -4,6 +4,13 @@
 
 This package exports an implementation of `KeyValueCache` that allows using Aerospike as a backing store for resource caching in [Data Sources](https://www.apollographql.com/docs/apollo-server/data/data-sources/).
 
+## Installation
+[aerospike](https://www.npmjs.com/package/aerospike) npm package need to be installed as `peerDependencies`.
+
+```bash
+$ npm install aerospike apollo-server-cache-aerospike-kv
+```
+
 ## Usage
 
 ```js
