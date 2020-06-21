@@ -3,5 +3,8 @@
 test
 
 # files
+.eslintignore
+.eslintrc
 .travis.yml
+tsconfig.json
 tsconfig.tsbuildinfo
