@@ -1,7 +1,7 @@
 {
   "name": "apollo-server-cache-aerospike-kv",
   "version": "0.1.1",
-  "description": "Apollo server caching implementation with Aerospike",
+  "description": "Apollo server caching implementation of KeyValueCache with Aerospike",
   "main": "dist/index.js",
   "scripts": {
     "aerospike": "docker run -d --rm -p 3000:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 -e NAMESPACE=test aerospike/aerospike-server",
@@ -15,6 +15,7 @@
     "server",
     "cache",
     "aerospike",
+    "KeyValueCache",
     "graphql"
   ],
   "author": "Zulhilmi Mohamed Zainuddin",
